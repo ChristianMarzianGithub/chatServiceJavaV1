@@ -5,8 +5,7 @@
  */
 package chatservicejavav1;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 /**
  *
@@ -15,22 +14,35 @@ import java.sql.DriverManager;
 public class DataBaseHelper {
     
     private String server;
+    private String port;    
     private String database;    
     private String usr;
     private String password;
 
-    public DataBaseHelper(String server, String database, String usr, String password) {
+    public DataBaseHelper(String server, String port,String database, String usr, String password) {
         this.server = server;
+        this.port = port;
         this.database = database;
         this.usr = usr;
         this.password = password;
-    }
+    }    
     
-    public void connect(){        
-        String url = "jdbc:sqlserver://MYPC\\SQLEXPRESS;databaseName=" + database;
-        try{
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection(url, usr, password);
+    public void connect(){                
+        try{            
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection("jdbc:postgresql://" 
+                    + this.server 
+                    +":"
+                    + this.port 
+                    + "/"
+                    + this.database, this.usr,this.password);
+            
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM USR");
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+               System.out.println(rs.getInt(1) + ";" + rs.getString(2) + ";" + rs.getString(3));
+            }
+            
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -44,6 +56,14 @@ public class DataBaseHelper {
         this.server = server;
     }
 
+    
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
     public String getDatabase() {
         return database;
     }
