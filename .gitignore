@@ -24,3 +24,6 @@ hs_err_pid*
 /chatServiceJavaV1/nbproject/private/
 /chatServiceJavaV1/build/
 /chatServiceJavaV1/dist/
+/ExampleForTesting/nbproject/private/
+/ExampleForTesting/build/
+/ExampleForTesting/dist/

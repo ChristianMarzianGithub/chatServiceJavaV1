@@ -47,8 +47,8 @@ public class DataBaseHelper {
             System.out.println(e.getMessage());
         }
     }
-
     public String getServer() {
+
         return server;
     }
 
