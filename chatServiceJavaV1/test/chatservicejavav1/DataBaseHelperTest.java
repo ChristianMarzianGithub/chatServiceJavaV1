@@ -20,8 +20,6 @@ import static org.junit.Assert.*;
 public class DataBaseHelperTest {
     
     public DataBaseHelperTest() {
-        Assert.assertEquals("eins", "eins");
-        
     }
     
     @BeforeClass
@@ -45,6 +43,7 @@ public class DataBaseHelperTest {
      */
     @org.junit.Test
     public void testConnect() {
+        
         Assert.assertEquals("eins", "eins");
     }
 

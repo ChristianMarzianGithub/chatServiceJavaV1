@@ -27,6 +27,15 @@ public class DataBaseHelper {
         this.password = password;
     }    
     
+    public boolean login(String usr, String pw){
+        boolean loginWorked = false;
+        
+        
+        
+        
+        return loginWorked;
+    }
+    
     public void connect(){                
         try{            
             Class.forName("org.postgresql.Driver");
