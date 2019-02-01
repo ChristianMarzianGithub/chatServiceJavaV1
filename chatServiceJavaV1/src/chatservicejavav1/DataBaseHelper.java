@@ -29,14 +29,26 @@ public class DataBaseHelper {
     
     public boolean login(String usr, String pw){
         boolean loginWorked = false;
-        
-        
-        
+        String x = "";
+        String y = "";
+        ResultSet rs = connect("Select name,password from usr WHERE name = '" + usr + "' AND password = '" + pw + "'");
+        try{
+            while(rs.next()){
+                x = rs.getString(1);
+                y = rs.getString(2);
+                if(("peter".equals(x)) &&  ("123".equals(y))){
+                    loginWorked = true;
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
         return loginWorked;
     }
     
-    public void connect(){                
+    public ResultSet connect(String sqlStatement){     
+        ResultSet rs = null;
         try{            
             Class.forName("org.postgresql.Driver");
             Connection con = DriverManager.getConnection("jdbc:postgresql://" 
@@ -46,15 +58,18 @@ public class DataBaseHelper {
                     + "/"
                     + this.database, this.usr,this.password);
             
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM USR");
-            ResultSet rs = pst.executeQuery();
+            PreparedStatement pst = con.prepareStatement(sqlStatement);
+            rs = pst.executeQuery();
+            /*
             while(rs.next()){
                System.out.println(rs.getInt(1) + ";" + rs.getString(2) + ";" + rs.getString(3));
             }
+            */
             
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        return rs;
     }
     public String getServer() {
 

@@ -29,8 +29,11 @@ public class ChatServiceJavaV1 {
                 
         DataBaseHelper dsh = new DataBaseHelper("127.0.0.1","5432","chatDB","postgres","");
         
+        System.out.println(dsh.login(user, pw));
+        /*
         if(dsh.login(user, pw)){
-            dsh.connect();
-        }        
+            //dsh.connect();
+        }
+                */
     }    
 }
